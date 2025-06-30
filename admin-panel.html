@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>3C3K — Админ Панель</title>
+<link href="https://i.pinimg.com/736x/55/95/26/559526eb4e982610fbb4d2891bc292d0.jpg " rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet"/>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #111;
+      color: #f5f5f5;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    header, main, footer { position: relative; z-index: 1; }
+    header {
+      padding: 2rem 1rem;
+      text-align: center;
+      background-color: rgba(34,34,34,0.8);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #00ff99;
+      margin-bottom: 0.5rem;
+      font-family: 'Press Start 2P', monospace;
+      text-shadow: 0 0 10px #00ff99;
+    }
+    header p { font-size: 1rem; color: #ccc; }
+    main {
+      padding: 2rem 1rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .console {
+      background-color: #000;
+      color: #00ff99;
+      padding: 2rem;
+      border: 1px solid #00ff99;
+      border-radius: 0.5rem;
+      margin-top: 2rem;
+      font-family: 'Courier New', Courier, monospace;
+      white-space: pre-wrap;
+      overflow-y: auto;
+      max-height: 400px;
+    }
+    .console-input {
+      display: flex;
+      margin-top: 1rem;
+    }
+    .console-input input {
+      flex: 1;
+      padding: 0.7rem;
+      border: 1px solid #00ff99;
+      border-radius: 0.3rem 0 0.3rem 0;
+      background-color: #111;
+      color: #f5f5f5;
+    }
+    .console-input button {
+      padding: 0.7rem 1.5rem;
+      border: 1px solid #00ff99;
+      border-radius: 0 0.3rem 0.3rem 0;
+      background-color: #00ff99;
+      color: #000;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .console-input button:hover {
+      background-color: #00cc88;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #777;
+      background-color: rgba(17,17,17,0.8);
+    }
+    a { color: #00ffaa; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+</style>
+<style>
+:root {
+  --bg: #111;
+  --text: #f5f5f5;
+  --accent: #00ff99;
+  --accent-light: #00ffaa;
+}
+[data-theme="light"] {
+  --bg: #fff;
+  --text: #111;
+  --accent: #00aa66;
+  --accent-light: #00cc88;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+}
+.theme-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  z-index: 99;
+}
+section:hover {
+  filter: brightness(1.1);
+}
+</style>
+</head>
+<body>
+<button class="theme-toggle" onclick="toggleTheme()">Сменить тему</button>
+<header>
+  <h1>3C3K — Админ Панель</h1>
+  <p>Консоль взломана! 💀</p>
+</header>
+<main>
+  <div class="console" id="consoleOutput">
+    > Запуск консоли...
+  </div>
+  <div class="console-input">
+    <input type="text" id="adminCommand" placeholder="Введите команду...">
+    <button onclick="executeCommand()">Выполнить</button>
+  </div>
+</main>
+<footer>
+  <p>3C3K Minecraft Server © 2024–2025</p>
+</footer>
+
+<audio id="hoverSound" src=" https://cdn.pixabay.com/download/audio/2022/03/14/audio_3032c1eb1e.mp3?filename=interface-click-124467.mp3"></audio>
+
+<script>
+function toggleTheme() {
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme') || 'dark';
+  root.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+}
+
+document.querySelectorAll('section').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    const snd = document.getElementById('hoverSound');
+    snd.pause(); snd.currentTime = 0; snd.play();
+  });
+});
+
+// Функция для выполнения команд
+function executeCommand() {
+  const command = document.getElementById("adminCommand").value.trim();
+  let response = "";
+
+  switch (command) {
+    case "/home":
+      response = "🏠 Что? Дом? Ты в аду. Тут нет ни дома, ни пощады.";
+      break;
+    case "/sethome":
+      response = "🧱 Сетхом? Сетголгофа разве что.";
+      break;
+    case "/spawn":
+      response = "🧨 Тебе туда и не надо. Поверь.";
+      break;
+    case "/tpa D3adCode":
+      response = "📡 Кто тебе сказал, что тут есть телепортация? С топором иди!";
+      break;
+    case "/warp shop":
+      response = "🛒 Магазин? Ты не туда зашёл, брат.";
+      break;
+    case "/pay GriefMan 100":
+      response = "💸 Ага, и скидку по карте 2b2t хочешь?";
+      break;
+    case "/buy vip":
+      response = "💰 VIP? Тут даже Бог играет как смертный.";
+      break;
+    case "/kit start":
+      response = "🎒 Старта нет. Есть только конец.";
+      break;
+    case "/rtp":
+      response = "📍 Рандом? У нас есть Elytra и ад. Вот тебе и \"рандом\".";
+      break;
+    case "/rules":
+      response = "📜 Не мешай серверу — и живи как хочешь. Это всё.";
+      break;
+    case "/afk":
+      response = "💤 Лучше не уходи. Кто-то уже роет под твоей базой.";
+      break;
+    case "/claim":
+      response = "📦 Приват? Приват тут только в твоей фантазии.";
+      break;
+    case "/gamemode creative":
+      response = "🚫 Хаха... Пробуй через читы. Всё равно не поможет.";
+      break;
+    case "/help":
+      response = "❓ Помощь? Тут выживает не тот, кто спрашивает.";
+      break;
+    case "/rules grief":
+      response = "🔥 Разрушай всё, что видишь. Просто не взорви сам сервер.";
+      break;
+    case "/back":
+      response = "🔙 Назад? Это анархия. Тут только вперёд — в хаос.";
+      break;
+    case "/register":
+      response = "📝 Никакой регистрации. Заходи — и гори.";
+      break;
+    case "/login":
+      response = "🔐 Слишком поздно, друг. Ты уже внутри.";
+      break;
+    case "/ignore":
+      response = "🙉 Игнорируешь? А вот античит тебя не игнорирует.";
+      break;
+    case "/ban":
+      response = "⛔ Сам решай свои проблемы. Модеров нет. Только ты и хаос.";
+      break;
+    case "/2k2fgovno":
+      response = "❤️ Полностью с тобой согласен!";
+      break;
+    default:
+      response = "Неизвестная команда";
+  }
+
+  // Добавляем команду и ответ в консоль
+  const consoleOutput = document.getElementById("consoleOutput");
+  consoleOutput.innerHTML += `<br>> ${command}<br>${response}`;
+  document.getElementById("adminCommand").value = "";
+  consoleOutput.scrollTop = consoleOutput.scrollHeight;
+}
+
+// Функция для обработки нажатия клавиши Enter
+function handleKeyPress(event) {
+  if (event.key === "Enter") {
+    executeCommand();
+  }
+}
+
+document.getElementById("adminCommand").addEventListener("keydown", handleKeyPress);
+</script>
+</body>
+</html>
