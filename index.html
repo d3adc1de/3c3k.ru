@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3C3K — Анархический Minecraft сервер</title>
-  <link rel="icon" href="https://i.pinimg.com/736x/55/95/26/559526eb4e982610fbb4d2891bc292d0.jpg" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>3C3K — Анархический Minecraft сервер</title>
+<link href="https://i.pinimg.com/736x/55/95/26/559526eb4e982610fbb4d2891bc292d0.jpg " rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet"/>
+<style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -99,102 +99,216 @@
     a { color: #00ffaa; text-decoration: none; }
     a:hover { text-decoration: underline; }
     ul { margin-top: 0.5rem; margin-left: 1rem; }
-  </style>
+    /* Модальное окно */
+    .modal {
+      display: none; /* Скрыто по умолчанию */
+      position: fixed; /* Фиксированное положение */
+      z-index: 100; /* Выше всего */
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4); /* Черный фон с прозрачностью */
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto; /* Центрирование */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Ширина модального окна */
+      max-width: 600px;
+      border-radius: 8px;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+</style>
+<style>
+:root {
+  --bg: #111;
+  --text: #f5f5f5;
+  --accent: #00ff99;
+  --accent-light: #00ffaa;
+}
+[data-theme="light"] {
+  --bg: #fff;
+  --text: #111;
+  --accent: #00aa66;
+  --accent-light: #00cc88;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+}
+.theme-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  z-index: 99;
+}
+section:hover {
+  filter: brightness(1.1);
+}
+#player-msgs {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--accent-light);
+  text-align: center;
+  opacity: 0;
+  transition: opacity 1s ease;
+  min-height: 1.5em;
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>3C3K — Анархия без границ</h1>
-    <p>Работает без перебоев с сентября 2024</p>
-  </header>
+<button class="theme-toggle" onclick="toggleTheme()">Сменить тему</button>
+<header>
+<h1>3C3K — Анархия без границ</h1>
+<p>Работает без перебоев с сентября 2024</p>
 
-  <main>
-    <div class="ip-box">IP сервера: <strong>3c3k.ru</strong></div>
+<div id="player-msgs"></div>
+</header>
+<main>
+<div class="ip-box">IP сервера: <strong>3c3k.ru</strong></div>
+<div class="section-wrapper">
+<h3>📦 Информация о сервере</h3>
+<section>
+<h2>📘 Общая информация</h2>
+<p>3C3K — это настоящий анархический Minecraft-сервер. Без доната, без дюпов, без привилегий. Все равны. У нас разрешены читы и минимум правил.</p>
+<p>Версия сервера: с 1.12.2 до 1.21</p>
+</section>
+<section>
+<h2>🐞 Дюпы отключены</h2>
+<p>Сервер стабилен, дюпы заблокированы. Ресурсы нужно добывать, или отнимать у других игроков.</p>
+</section>
+<section>
+<h2>🚫 Без доната</h2>
+<p>На 3C3K нет платных функций, доната, привилегий или админов с преимуществами. Играешь как хочешь — и на равных с остальными.</p>
+</section>
+</div>
+<div class="section-wrapper">
+<h3>🛡️ Правила и защита</h3>
+<div class="flex-split">
+<div class="half">
+<section>
+<h2>🧠 Античит: NoCheatPlus (NCP)</h2>
+<p>Сервер защищён античитом NCP. Он блокирует попытки обмана сервера, включая телепортации, полёт, подводные и скоростные читы.</p>
+</section>
+</div>
+<div class="half">
+<section>
+<h2>🔌 Установленные плагины</h2>
+<ul>
+<li><strong>Purpur</strong> — улучшенная производительность ядра</li>
+<li><strong>BungeeGuard</strong> — защита BungeeCord от внешних подключений</li>
+<li><strong>CoreProtect</strong> — логирование и откат действий игроков</li>
+<li><strong>HideStream</strong> — скрытие сообщений входа/выхода</li>
+<li><strong>LuckPerms</strong> — система прав и ролей</li>
+<li><strong>PlaceholderAPI</strong> — переменные в табах и сообщениях</li>
+<li><strong>ProtocolLib</strong> — основа для многих плагинов</li>
+<li><strong>TitleManager</strong> — кастомизация титулов и таба</li>
+<li><strong>UnExpectedSpawn</strong> — управление спавном игроков</li>
+<li><strong>ViaVersion</strong> — поддержка новых клиентов</li>
+</ul>
+</section>
+</div>
+</div>
+<section>
+<h2>📜 Минимум правил</h2>
+<p>Единственное правило — не мешать работе сервера. Всё остальное разрешено. Хочешь — грифи, хочешь — строй. Полная свобода.</p>
+</section>
+<section>
+<h2>⚙️ Читы разрешены</h2>
+<p>На сервере разрешены ElytraFly (до 79.9 блоков/сек), Speed, Timer, NoFall, XRay, Baritone и другие базовые читы. Однако <strong>все эксплоиты строго запрещены</strong>.</p>
+</section>
+</div>
+<div class="section-wrapper">
+<h3>🧑‍💻 Разработчики сервера</h3>
+<section>
+<h2>👑 Основатель: Kaca</h2>
+<p>Идейный вдохновитель и создатель мира 3C3K. Без него не было бы анархии в том виде, как мы её знаем. Ведёт проект с начала и продолжает развивать его.</p>
+</section>
+<section>
+<h2>🛠️ Тех. Админ: Fen1X_TM</h2>
+<p>Обеспечивает стабильную работу сервера, обновления, безопасность и плагин-систему. Настоящий бэкэнд-маг, делающий сервер быстрым и надёжным.</p>
+</section>
+</div>
+<div class="section-wrapper">
+<h3>🌐 Социальные сети</h3>
+<div class="socials">
+<a href=" https://vk.com/3c3k_minecraft " target="_blank" title="Группа ВК">
+<img alt="VK" src="https://cdn-icons-png.flaticon.com/512/145/145813.png "/>
+</a>
+<a href="https://t.me/Anarchy_channel3c3k " target="_blank" title="Telegram-канал">
+<img alt="Telegram" src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png "/>
+</a>
+<a href="https://discord.com/invite/ZWX2vBgtEq " target="_blank" title="Discord-сервер">
+<img alt="Discord" src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png "/>
+</a>
+</div>
+</div>
 
-    <div class="section-wrapper">
-      <h3>📦 Информация о сервере</h3>
-      <section>
-        <h2>📘 Общая информация</h2>
-        <p>3C3K — это настоящий анархический Minecraft-сервер. Без доната, без дюпов, без привилегий. Все равны. У нас разрешены читы и минимум правил.</p>
-        <p>Версия сервера: с 1.12.2 до 1.21</p>
-      </section>
-      <section>
-        <h2>🐞 Дюпы отключены</h2>
-        <p>Сервер стабилен, дюпы заблокированы. Ресурсы нужно добывать, или отнимать у других игроков.</p>
-      </section>
-      <section>
-        <h2>🚫 Без доната</h2>
-        <p>На 3C3K нет платных функций, доната, привилегий или админов с преимуществами. Играешь как хочешь — и на равных с остальными.</p>
-      </section>
-    </div>
+<div class="section-wrapper" style="text-align: center;">
+  <a class="ip-box" href="feedback.html">Отзывы о сервере</a>
+  <a class="ip-box" href="admin-panel.html">Админ Панель</a>
+</div>
+</main>
+<footer>
+<p>3C3K Minecraft Server © 2024–2025</p>
+</footer>
 
-    <div class="section-wrapper">
-      <h3>🛡️ Правила и защита</h3>
-      <div class="flex-split">
-        <div class="half">
-          <section>
-            <h2>🧠 Античит: NoCheatPlus (NCP)</h2>
-            <p>Сервер защищён античитом NCP. Он блокирует попытки обмана сервера, включая телепортации, полёт, подводные и скоростные читы.</p>
-          </section>
-        </div>
-        <div class="half">
-          <section>
-            <h2>🔌 Установленные плагины</h2>
-            <ul>
-              <li><strong>Purpur</strong> — улучшенная производительность ядра</li>
-              <li><strong>BungeeGuard</strong> — защита BungeeCord от внешних подключений</li>
-              <li><strong>CoreProtect</strong> — логирование и откат действий игроков</li>
-              <li><strong>HideStream</strong> — скрытие сообщений входа/выхода</li>
-              <li><strong>LuckPerms</strong> — система прав и ролей</li>
-              <li><strong>PlaceholderAPI</strong> — переменные в табах и сообщениях</li>
-              <li><strong>ProtocolLib</strong> — основа для многих плагинов</li>
-              <li><strong>TitleManager</strong> — кастомизация титулов и таба</li>
-              <li><strong>UnExpectedSpawn</strong> — управление спавном игроков</li>
-              <li><strong>ViaVersion</strong> — поддержка новых клиентов</li>
-            </ul>
-          </section>
-        </div>
-      </div>
+<audio id="hoverSound" src="https://cdn.pixabay.com/download/audio/2022/03/14/audio_3032c1eb1e.mp3?filename=interface-click-124467.mp3"></audio>
 
-      <section>
-        <h2>📜 Минимум правил</h2>
-        <p>Единственное правило — не мешать работе сервера. Всё остальное разрешено. Хочешь — грифи, хочешь — строй. Полная свобода.</p>
-      </section>
-      <section>
-        <h2>⚙️ Читы разрешены</h2>
-        <p>На сервере разрешены ElytraFly (до 79.9 блоков/сек), Speed, Timer, NoFall, XRay, Baritone и другие базовые читы. Однако <strong>все эксплоиты строго запрещены</strong>.</p>
-      </section>
-    </div>
+<script>
+function toggleTheme() {
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme') || 'dark';
+  root.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+}
 
-    <div class="section-wrapper">
-      <h3>🧑‍💻 Разработчики сервера</h3>
-      <section>
-        <h2>👑 Основатель: Kaca</h2>
-        <p>Идейный вдохновитель и создатель мира 3C3K. Без него не было бы анархии в том виде, как мы её знаем. Ведёт проект с начала и продолжает развивать его.</p>
-      </section>
-      <section>
-        <h2>🛠️ Тех. Админ: Fen1X_TM</h2>
-        <p>Обеспечивает стабильную работу сервера, обновления, безопасность и плагин-систему. Настоящий бэкэнд-маг, делающий сервер быстрым и надёжным.</p>
-      </section>
-    </div>
+document.querySelectorAll('section').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    const snd = document.getElementById('hoverSound');
+    snd.pause(); snd.currentTime = 0; snd.play();
+  });
+});
 
-    <div class="section-wrapper">
-      <h3>🌐 Социальные сети</h3>
-      <div class="socials">
-        <a href="https://vk.com/3c3k_minecraft" target="_blank" title="Группа ВК">
-          <img src="https://cdn-icons-png.flaticon.com/512/145/145813.png" alt="VK">
-        </a>
-        <a href="https://t.me/Anarchy_channel3c3k" target="_blank" title="Telegram-канал">
-          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram">
-        </a>
-        <a href="https://discord.com/invite/ZWX2vBgtEq" target="_blank" title="Discord-сервер">
-          <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord">
-        </a>
-      </div>
-    </div>
-  </main>
+const messages = [
+  "AandroiD: НЕЛЬЗЯ СЛЕДИТЬ И КРАСТЬСЯ!",
+  "D3adCode: Тут выживет только истинный фанат Анархии!",
+  "Kaca: Хостинг Имба! At: /3c3k.ru"
+];
 
-  <footer>
-    <p>3C3K Minecraft Server © 2024–2025</p>
-  </footer>
+let msgIndex = 0;
+function showNextMessage() {
+  const box = document.getElementById('player-msgs');
+  if (!box) return;
+  box.style.opacity = 0;
+  setTimeout(() => {
+    box.innerText = messages[msgIndex];
+    msgIndex = (msgIndex + 1) % messages.length;
+    box.style.opacity = 1;
+  }, 500);
+}
+setInterval(showNextMessage, 6000);
+window.onload = showNextMessage;
+</script>
 </body>
 </html>
